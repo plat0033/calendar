@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+    <header>
+
+    </header>
+    <section id="app" class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="display-1 text-center text-primary">Calendar</div>
+            </div>
+            
+        </div>
+        <div class="row">
+            <div class="col-4 display-4 text-secondary">
+                <select v-model="monthSelected" class="custom-select custom-select-lg mb-3" >
+                    <option v-for="m in months" :value="m.value" class="text-secondary">{{ m.month }}</option>
+                  </select>
+            </div>
+            <div class="col-5"> </div>
+            <div class="col-3">
+                <div class="input-group input-group-lg">
+                    <div class="input-group-prepend">
+                      <span  class="input-group-text" id="inputGroup-sizing-lg">Year</span>
+                    </div>
+                    <input v-model="yearSelected" type="number" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm" min="2000" max="2100">
+                </div>
+            </div>
+        </div>
+        
+          
+
+        <div class="row">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                      <th v-for="column in columns" scope="col"><h1>{{ column }}</h1></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="week in displayMonth">
+                        <td v-for="dayOfWeek in week">
+                            <div v-if="dayOfWeek === new Date().getDate() && monthSelected === new Date().getMonth()+1 ">
+                                <h4 class="text-primary font-weight-bold"><u>{{ dayOfWeek }} </u></h4>
+                                <div v-if="events.some(event => event.event_date == (monthSelected + dayOfWeek.toString() + yearSelected))" >
+                                    <!--{{events[dayOfWeek-1].description.title}} 
+                                    {{events2[(monthSelected + dayOfWeek.toString() + yearSelected)].title}}-->
+                                    
+                                    <simple-button 
+                                        :month="monthSelected" :day="dayOfWeek" :year="yearSelected" 
+                                        :actual_title="events2[(monthSelected + dayOfWeek.toString() + yearSelected)].title"
+                                        :actual_hour="events2[(monthSelected + dayOfWeek.toString() + yearSelected)].hour"
+                                        :actual_desc="events2[(monthSelected + dayOfWeek.toString() + yearSelected)].desc">
+                                    </simple-button>
+                                  </div>
+                                  <div v-else>
+                                    <simple-button :month="monthSelected" :day="dayOfWeek" :year="yearSelected" 
+                                    :actual_title="''" 
+                                    :actual_hour="'12:00'"
+                                    :actual_desc="''"></simple-button>
+                                  </div>
+                            </div>
+                            <div v-else-if="dayOfWeek">
+                                <h4>{{ dayOfWeek }}</h4>
+                                <div v-if="events.some(event => event.event_date == (monthSelected + dayOfWeek.toString() + yearSelected))" >
+                                  <!--{{events[dayOfWeek-1].description.title}} 
+                                  {{events2[(monthSelected + dayOfWeek.toString() + yearSelected)].title}}-->
+                                  
+                                  <simple-button 
+                                      :month="monthSelected" :day="dayOfWeek" :year="yearSelected" 
+                                      :actual_title="events2[(monthSelected + dayOfWeek.toString() + yearSelected)].title"
+                                      :actual_hour="events2[(monthSelected + dayOfWeek.toString() + yearSelected)].hour"
+                                      :actual_desc="events2[(monthSelected + dayOfWeek.toString() + yearSelected)].desc">
+                                  </simple-button>
+                                </div>
+                                <div v-else>
+                                  <simple-button :month="monthSelected" :day="dayOfWeek" :year="yearSelected" 
+                                  :actual_title="''" 
+                                  :actual_hour="'12:00'"
+                                  :actual_desc="''"></simple-button>
+                                </div>
+      
+                                <div>
+                                  
+                                </div>
+                            </div>
+                          
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="app.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+</html>
