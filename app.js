@@ -49,9 +49,9 @@ const app = new Vue({
     editEventForm: false,
     months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
     events: [
-      { text: 'Web Production', date: '2020-02-03T01:30', details: 'Vue Transitions and localStorage' },
-      { text: 'Web Production', date: '2020-02-10T13:30', details: 'Vue CLI' },
-      { text: 'Web Production', date: '2020-02-17T13:30', details: 'No Class' }
+      // { text: 'Web Production', date: '2020-02-03T01:30', details: 'Vue Transitions and localStorage' },
+      // { text: 'Web Production', date: '2020-02-10T13:30', details: 'Vue CLI' },
+      // { text: 'Web Production', date: '2020-02-17T13:30', details: 'No Class' }
     ]
   },
   mounted: function () {
